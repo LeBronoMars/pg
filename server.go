@@ -25,6 +25,7 @@ func LoadAPIRoutes(r *gin.Engine, db *gorm.DB) {
 
 	//manage users
 	surveyHandler := h.NewSurveyHandler(db)
+	public.GET("/surveys", surveyHandler.Index)
 	public.POST("/survey", surveyHandler.Create)
 
 	r.Run(fmt.Sprintf(":%s", "7000"))

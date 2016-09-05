@@ -28,6 +28,7 @@ func (handler SurveyHandler) Index(c *gin.Context) {
 	limitParam,limitParamExist := c.GetQuery("limit")
 	statusParam,statusParamExist := c.GetQuery("status")
 	whenParam,whenParamExist := c.GetQuery("when")
+	divParam,divParamExist := c.GetQuery("division")
 
 	//start param exist
 	if startParamExist {
@@ -49,6 +50,11 @@ func (handler SurveyHandler) Index(c *gin.Context) {
 	if statusParamExist {
 		query = query.Where("status = ?",statusParam)
 	}
+
+	//division param exist
+	if divParamExist {
+		query = query.Where("division = ?",divParam)
+	} 
 
 	//when param exist
 	if whenParamExist {
