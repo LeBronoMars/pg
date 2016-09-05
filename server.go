@@ -8,6 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 	_ "github.com/go-sql-driver/mysql"
 	m "philgheps/survey/api/models"
+	h "philgheps/survey/api/handlers"
 	"philgheps/survey/api/config"
 	"github.com/jinzhu/gorm"
 	"github.com/dgrijalva/jwt-go"
@@ -20,9 +21,11 @@ func main() {
 }
 
 func LoadAPIRoutes(r *gin.Engine, db *gorm.DB) {
-	//public := r.Group("/api/v1")
-	private := r.Group("/api/v1")
-	private.Use(Auth(config.GetString("TOKEN_KEY")))
+	public := r.Group("/api/v1")
+
+	//manage users
+	surveyHandler := h.NewSurveyHandler(db)
+	public.POST("/survey", surveyHandler.Create)
 
 	r.Run(fmt.Sprintf(":%s", "7000"))
 }
