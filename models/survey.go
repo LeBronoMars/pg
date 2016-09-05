@@ -2,7 +2,7 @@ package models
 
 type Survey struct {
 	BaseModel
-	TransactionWith string `json:"transaction_with" form:"transaction_with" binding:"required"`
+	LocalId int `json:"local_id" form:"local_id"`
 	Division string `json:"division" form:"division" binding:"required"`
 	ServiceRequested string `json:"service_requested" form:"service_requested"`
 	Comments string `json:"comments" form:"comments"`
@@ -10,9 +10,9 @@ type Survey struct {
 	Agency string `json:"agency" form:"agency"`
 	Address string `json:"address" form:"address"`
 	ContactNo string `json:"contact_no" form:"contact_no"`
-	Email string `json:"emai" form:"email"`
+	Email string `json:"email" form:"email"`
 	Rating int `json:"rating" form:"rating"`
-	Status string `json:"status"`
+	Status string `json:"-"`
 }
 
 func (i *Survey) BeforeCreate() (err error) {
